@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://v3r6fyokxtxr"]
+
+[ext_resource type="Script" uid="uid://cg5q2p2s0s5gh" path="res://scripts/trail.gd" id="1_xjhlx"]
+
+[sub_resource type="Curve" id="Curve_xjhlx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Trail" type="Line2D"]
+top_level = true
+width_curve = SubResource("Curve_xjhlx")
+default_color = Color(1, 1, 1, 0.631373)
+script = ExtResource("1_xjhlx")

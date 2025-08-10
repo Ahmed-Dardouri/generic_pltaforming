@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://y6c8165e4r0s"]
+[gd_scene load_steps=3 format=3 uid="uid://y6c8165e4r0s"]
 
 [ext_resource type="Script" uid="uid://36riehw34na8" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://v3r6fyokxtxr" path="res://scenes/trail.tscn" id="2_g2els"]
 
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(0.639999, 0.639999)
@@ -15,3 +16,9 @@ scale = Vector2(1.10684, 1.31903)
 polygon = PackedVector2Array(0.0116186, -28.0303, -2.62683, -28.0028, -9.1939, -26.9656, -14.4476, -23.8542, -14.4476, 4.14856, 14.4476, 4.14856, 14.4476, -23.8542, 9.1939, -26.9656, 2.62683, -28.0028)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Trail" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("2_g2els")]
+width = 3.0
+default_color = Color(1, 1, 1, 1)
+MAX_LENGTH = 200
+main_body = NodePath("..")
