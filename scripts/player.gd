@@ -7,8 +7,8 @@ extends CharacterBody2D
 @export var max_speed : int = 300
 @export var end_jump_early_timeout : float = 300
 @export var jump_buffer_timeout : float = 150
-@export var grounding_force : float = 0
-@export var fall_acceleration : float = 1500.0
+@export var grounding_force : float = 1.5
+@export var fall_acceleration : float = 1800.0
 @export var max_fall_speed : float = 800
 @export var Jump_ended_early_gravity_modifier : float = 3.0
 @export var gravity : float = 9.8

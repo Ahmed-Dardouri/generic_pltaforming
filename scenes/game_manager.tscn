@@ -41,16 +41,15 @@ position = Vector2(1281.09, 1.20545)
 scale = Vector2(6.94136, 0.022238)
 
 [node name="static12" parent="statics" instance=ExtResource("3_eaq8r")]
-position = Vector2(964.449, -0.468789)
+position = Vector2(960.297, -0.468789)
 scale = Vector2(6.94136, 0.022238)
 
 [node name="static13" parent="statics" instance=ExtResource("3_eaq8r")]
 position = Vector2(721.52, -2.09839)
 scale = Vector2(5.86168, 0.022238)
 
-[node name="static9" parent="statics/static13" instance=ExtResource("3_eaq8r")]
-position = Vector2(1281.09, 1.20545)
-scale = Vector2(6.94029, 0.0223184)
+[node name="static14" parent="statics" instance=ExtResource("3_eaq8r")]
+position = Vector2(606.285, -9.71061)
 
 [node name="player" parent="." instance=ExtResource("2_oo155")]
-position = Vector2(37, -450.858)
+position = Vector2(-34.72, -414.629)

@@ -23,11 +23,12 @@ polygon = PackedVector2Array(0.0116186, -28.0303, -2.62683, -28.0028, -9.1939, -
 [node name="Trail" parent="." node_paths=PackedStringArray("main_body") instance=ExtResource("2_g2els")]
 width = 3.0
 default_color = Color(1, 1, 1, 1)
-MAX_LENGTH = 200
+MAX_LENGTH = 400
 main_body = NodePath("..")
 
 [node name="groundcast" type="ShapeCast2D" parent="."]
 position = Vector2(0, -3.12501)
+scale = Vector2(1.617, 0.961)
 shape = SubResource("RectangleShape2D_g2els")
 target_position = Vector2(0, 0)
 max_results = 1
