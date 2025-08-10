@@ -14,37 +14,17 @@ scale = Vector2(0.963244, 45.0821)
 position = Vector2(688.299, 9.93607)
 scale = Vector2(70.9269, 0.0221818)
 
-[node name="static2" parent="statics" instance=ExtResource("3_eaq8r")]
-position = Vector2(769.275, 9.0488)
-scale = Vector2(1.03816, 0.0221818)
-
 [node name="static3" parent="statics" instance=ExtResource("3_eaq8r")]
 position = Vector2(790.038, 8.18371)
-scale = Vector2(1.03816, 0.0221818)
-
-[node name="static4" parent="statics" instance=ExtResource("3_eaq8r")]
-position = Vector2(810.801, 7.34081)
-scale = Vector2(1.03816, 0.0221818)
+scale = Vector2(3.11448, 0.0221818)
 
 [node name="static5" parent="statics" instance=ExtResource("3_eaq8r")]
 position = Vector2(850.251, 6.71972)
-scale = Vector2(1.03816, 0.0221818)
+scale = Vector2(3.945, 0.0221818)
 
 [node name="static6" parent="statics" instance=ExtResource("3_eaq8r")]
-position = Vector2(886.587, 7.14117)
-scale = Vector2(1.03816, 0.0221818)
-
-[node name="static7" parent="statics" instance=ExtResource("3_eaq8r")]
-position = Vector2(912.541, 7.76226)
-scale = Vector2(1.03816, 0.0221818)
-
-[node name="static8" parent="statics" instance=ExtResource("3_eaq8r")]
-position = Vector2(935.38, 8.42771)
-scale = Vector2(1.03816, 0.0221818)
-
-[node name="static9" parent="statics" instance=ExtResource("3_eaq8r")]
-position = Vector2(953.029, 9.20407)
-scale = Vector2(1.03816, 0.0221818)
+position = Vector2(1018.01, 5.27275)
+scale = Vector2(6.94136, 0.022238)
 
 [node name="static10" parent="statics" instance=ExtResource("3_eaq8r")]
 position = Vector2(1395.28, 4.76837e-07)
@@ -52,4 +32,25 @@ scale = Vector2(1.03816, 1)
 
 [node name="static11" parent="statics" instance=ExtResource("3_eaq8r")]
 
+[node name="static7" parent="statics" instance=ExtResource("3_eaq8r")]
+position = Vector2(1154.43, 3.1699)
+scale = Vector2(6.94136, 0.022238)
+
+[node name="static9" parent="statics" instance=ExtResource("3_eaq8r")]
+position = Vector2(1281.09, 1.20545)
+scale = Vector2(6.94136, 0.022238)
+
+[node name="static12" parent="statics" instance=ExtResource("3_eaq8r")]
+position = Vector2(964.449, -0.468789)
+scale = Vector2(6.94136, 0.022238)
+
+[node name="static13" parent="statics" instance=ExtResource("3_eaq8r")]
+position = Vector2(721.52, -2.09839)
+scale = Vector2(6.94136, 0.022238)
+
+[node name="static9" parent="statics/static13" instance=ExtResource("3_eaq8r")]
+position = Vector2(1281.09, 1.20545)
+scale = Vector2(6.94029, 0.0223184)
+
 [node name="player" parent="." instance=ExtResource("2_oo155")]
+position = Vector2(37, -450.858)

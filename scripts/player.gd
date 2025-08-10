@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
 
-@export var jump_power : int = -400
+@export var jump_power : int = -600
 @export var max_speed : int = 300
 @export var end_jump_early_timeout : float = 300
 @export var jump_buffer_timeout : float = 150
 @export var grounding_force : float = 1.5
-@export var fall_acceleration : float = 1000.0
+@export var fall_acceleration : float = 1500.0
 @export var max_fall_speed : float = 800
 @export var Jump_ended_early_gravity_modifier : float = 3.0
 @export var gravity : float = 9.8
@@ -21,7 +21,7 @@ var _grounded : bool = false
 var _leftHeld : bool = false
 var _rightHeld : bool = false
 var _JumpHeld : bool = false
-var _JumpDown : bool = false
+var _JumpHeldPrev : bool = false
 var _jumpToConsume : bool = false
 var _CanUseCoyote : bool = false
 var _bufferedJumpUsable : bool = false
@@ -34,6 +34,7 @@ var _coyoteUsable : bool = false
 var _move : Vector2 = Vector2.ZERO
 var _frameVelocity : Vector2 = Vector2.ZERO
 var _timeJumpWasPressed : int = 0
+var _timeJumpWasReleased : int = 0
 
 func _physics_process(delta: float) -> void:
 		
@@ -56,7 +57,8 @@ func _physics_process(delta: float) -> void:
 
 
 func HandleJump() -> void:
-	if !_endedJumpEarly && !_grounded && !_JumpHeld && velocity.y > 0 && Time.get_ticks_msec() < (_timeJumpWasPressed + end_jump_early_timeout) :
+
+	if !_endedJumpEarly && !_grounded && !_JumpHeld && velocity.y < 0:
 		_endedJumpEarly = true
 		
 	if _jumpToConsume && HasBufferedJump():
@@ -76,7 +78,8 @@ func HandleGravity(delta: float):
 		_frameVelocity.y = grounding_force
 	else:
 		var inAirGravity = fall_acceleration
-		if _endedJumpEarly && _frameVelocity.y > 0 :
+		if _endedJumpEarly && _frameVelocity.y < 0 :
+			
 			inAirGravity *= Jump_ended_early_gravity_modifier
 		_frameVelocity.y = move_toward(_frameVelocity.y, max_fall_speed, inAirGravity * delta)
 			
@@ -110,7 +113,6 @@ func HasBufferedJump() -> bool:
 func ApplyMovement(delta: float):
 	
 	_frameVelocity.x = move_toward(_frameVelocity.x, _move.x * max_speed, acceleration * delta)
-	print(_move)
 
 func _input(event: InputEvent) -> void:
 	
@@ -119,12 +121,7 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_released("Jump"):
 		_JumpHeld = false
-	
-	if _JumpHeld:
-		if _JumpDown  == false:
-			_JumpDown = true
-	else:
-		_JumpDown = false
+		_timeJumpWasReleased = Time.get_ticks_msec()
 	
 	if event.is_action_pressed("Left"):
 		_leftHeld = true
@@ -144,7 +141,8 @@ func _input(event: InputEvent) -> void:
 	else:
 		_move.x = 0	
 		
-	if _JumpDown:
+	if !_JumpHeldPrev && _JumpHeld:
 		_jumpToConsume = true
-		_JumpDown = false
 		_timeJumpWasPressed = Time.get_ticks_msec()
+	
+	_JumpHeldPrev = _JumpHeld
