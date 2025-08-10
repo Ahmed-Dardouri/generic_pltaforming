@@ -1,11 +1,13 @@
 extends CharacterBody2D
 
+@onready var ground_cast := $groundcast
+@onready var ceiling_cast := $ceilingcast
 
 @export var jump_power : int = -600
 @export var max_speed : int = 300
 @export var end_jump_early_timeout : float = 300
 @export var jump_buffer_timeout : float = 150
-@export var grounding_force : float = 1.5
+@export var grounding_force : float = 0
 @export var fall_acceleration : float = 1500.0
 @export var max_fall_speed : float = 800
 @export var Jump_ended_early_gravity_modifier : float = 3.0
@@ -16,6 +18,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 
+var _ceiled : bool = false
 var _endedJumpEarly : bool = false
 var _grounded : bool = false
 var _leftHeld : bool = false
@@ -49,6 +52,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
+	CheckCeiling()
 	ApplyMovement(delta)
 	ApplyVelocity()
 	move_and_slide()
@@ -74,7 +78,7 @@ func ExecuteJump():
 	_frameVelocity.y = jump_power
 
 func HandleGravity(delta: float):
-	if _grounded && _frameVelocity.y <= 0:
+	if _grounded && _frameVelocity.y >= 0:
 		_frameVelocity.y = grounding_force
 	else:
 		var inAirGravity = fall_acceleration
@@ -86,10 +90,16 @@ func HandleGravity(delta: float):
 
 
 
-		
+func CheckCeiling():
+	var prev_ceiled = _ceiled
+	_ceiled = ceiling_cast.is_colliding()
+	if !prev_ceiled && _ceiled:
+		_frameVelocity.y = 0
+
 func CheckGround():
 	var previously_grounded = _grounded
-	_grounded = is_on_floor()
+	_grounded = ground_cast.is_colliding()
+	print(_grounded)
 	_bufferedJumpUsable = true
 	
 	if !previously_grounded && _grounded:

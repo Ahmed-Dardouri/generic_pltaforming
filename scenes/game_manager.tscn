@@ -46,7 +46,7 @@ scale = Vector2(6.94136, 0.022238)
 
 [node name="static13" parent="statics" instance=ExtResource("3_eaq8r")]
 position = Vector2(721.52, -2.09839)
-scale = Vector2(6.94136, 0.022238)
+scale = Vector2(5.86168, 0.022238)
 
 [node name="static9" parent="statics/static13" instance=ExtResource("3_eaq8r")]
 position = Vector2(1281.09, 1.20545)
