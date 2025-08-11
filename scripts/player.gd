@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var jump_power : int = -600
 @export var max_speed : int = 300
 @export var end_jump_early_timeout : float = 300
+@export var coyote_timeout : float = 150
 @export var jump_buffer_timeout : float = 150
 @export var grounding_force : float = 1.5
 @export var fall_acceleration : float = 1800.0
@@ -26,7 +27,6 @@ var _rightHeld : bool = false
 var _JumpHeld : bool = false
 var _JumpHeldPrev : bool = false
 var _jumpToConsume : bool = false
-var _CanUseCoyote : bool = false
 var _bufferedJumpUsable : bool = false
 var _coyoteUsable : bool = false
 
@@ -37,6 +37,7 @@ var _coyoteUsable : bool = false
 var _move : Vector2 = Vector2.ZERO
 var _frameVelocity : Vector2 = Vector2.ZERO
 var _timeJumpWasPressed : int = 0
+var _timeLeftGround : int = 0
 var _timeJumpWasReleased : int = 0
 
 func _physics_process(delta: float) -> void:
@@ -66,7 +67,7 @@ func HandleJump() -> void:
 		_endedJumpEarly = true
 		
 	if _jumpToConsume && HasBufferedJump():
-		if _grounded || _CanUseCoyote:
+		if _grounded || canCoyote():
 			ExecuteJump()
 			_jumpToConsume = false;
 
@@ -101,11 +102,13 @@ func CheckGround():
 	_grounded = ground_cast.is_colliding()
 	print(_grounded)
 	_bufferedJumpUsable = true
+	_coyoteUsable = true
 	
 	if !previously_grounded && _grounded:
 		_coyoteUsable = true
 		_endedJumpEarly = false
-		
+	elif previously_grounded && !_grounded:
+		_timeLeftGround = Time.get_ticks_msec()
 
 func ApplyVelocity():
 	velocity = _frameVelocity
@@ -119,6 +122,11 @@ func HasBufferedJump() -> bool:
 		
 	return buffered
 
+func canCoyote() -> bool:
+	var coyotable := false
+	if _coyoteUsable && Time.get_ticks_msec() < _timeLeftGround + coyote_timeout: 
+		coyotable = true
+	return coyotable
 
 func ApplyMovement(delta: float):
 	
