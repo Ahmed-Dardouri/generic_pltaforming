@@ -95,12 +95,11 @@ func CheckCeiling():
 	var prev_ceiled = _ceiled
 	_ceiled = ceiling_cast.is_colliding()
 	if !prev_ceiled && _ceiled:
-		_frameVelocity.y = 0
+		_frameVelocity.y = 1
 
 func CheckGround():
 	var previously_grounded = _grounded
 	_grounded = ground_cast.is_colliding()
-	print(_grounded)
 	_bufferedJumpUsable = true
 	_coyoteUsable = true
 	
